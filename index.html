@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banker's Algorithm Visualizer</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Meta Info -->
+  <meta name="description" content="Interactive visualization of Banker's Algorithm for deadlock avoidance" />
+  <meta name="author" content="Your Name" />
+</head>
+
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-blue-700 text-white py-6 shadow-md">
+    <div class="text-center">
+      <h1 class="text-3xl font-bold">Banker's Algorithm Visualizer</h1>
+      <p class="text-sm text-blue-200">Operating System Simulation Tool</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow container mx-auto px-4 py-6 space-y-8">
+
+    <!-- === Input Section === -->
+    <section id="input-section" class="bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-semibold mb-4 text-blue-700">Input Parameters</h2>
+
+      <form id="input-form" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="numProcesses" class="block font-medium mb-1">Number of Processes:</label>
+            <input type="number" id="numProcesses" min="1" max="10" value="5"
+                   class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          </div>
+
+          <div>
+            <label for="numResources" class="block font-medium mb-1">Number of Resource Types:</label>
+            <input type="number" id="numResources" min="1" max="5" value="3"
+                   class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button type="button" id="generateExample" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">Generate Example</button>
+          <button type="button" id="createMatrices" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Create Matrices</button>
+        </div>
+
+        <div id="matrix-inputs" class="hidden mt-4 border-t pt-4">
+          <!-- Dynamic matrices (Allocation, Max, Available) will be generated here by ui.js -->
+        </div>
+
+        <div class="flex flex-wrap gap-3 mt-4">
+          <button type="button" id="runSimulation" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">Run Simulation</button>
+          <button type="reset" id="resetForm" class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded">Reset</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- === Control Section === -->
+    <section id="control-section" class="bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-semibold mb-4 text-blue-700">Animation Controls</h2>
+
+      <div class="flex flex-wrap items-center gap-4">
+        <button id="playBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded">▶ Play</button>
+        <button id="pauseBtn" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-2 rounded">⏸ Pause</button>
+        <button id="stepForwardBtn" class="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded">⏩ Step Forward</button>
+        <button id="stepBackBtn" class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded">⏪ Step Back</button>
+      </div>
+    </section>
+
+    <!-- === Visualization Section === -->
+    <section id="visualization-section" class="bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-semibold mb-4 text-blue-700">Simulation Visualization</h2>
+      <div class="flex justify-center overflow-auto">
+        <canvas id="simulationCanvas" width="900" height="900" class="border border-gray-300 rounded"></canvas>
+      </div>
+    </section>
+
+    <!-- === Statistics Section === -->
+    <section id="statistics-section" class="bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-xl font-semibold mb-4 text-blue-700">Execution Statistics</h2>
+      <div id="stats-output" class="space-y-2">
+        <p><strong>Safe Sequence:</strong> <span id="safe-sequence" class="text-blue-600 font-semibold">N/A</span></p>
+        <p><strong>Current Step:</strong> <span id="current-step" class="text-gray-800">0</span></p>
+        <p><strong>System State:</strong> <span id="system-state" class="text-green-600 font-semibold">Idle</span></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-gray-300 text-center py-4 mt-auto">
+    <p>© 2025 School of Computer Science and Engineering | Developed for OS Project DA-1</p>
+  </footer>
+
+  <!-- JS Scripts -->
+  <script src="js/ui.js"></script>
+  <script src="js/bankerAlgorithm.js"></script>
+  <script src="js/animation.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
